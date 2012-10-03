@@ -1,7 +1,6 @@
 package com.bulpet.loto;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 import android.os.Bundle;
@@ -31,12 +30,17 @@ public class GetLoto extends Activity {
     	
     	ArrayList<Integer> arr = new ArrayList<Integer>(5);
     	
-    	for(;arr.size()<6;)
+    	LackyNumbers ln = new LackyNumbers();
+    	ArrayList<Integer> lackyArr = ln.getLackyNumbers();
+    	int indx = 6 - lackyArr.size();
+    	
+    	for(;arr.size()<indx;)
     	{
     		int tmp = r.nextInt(37)+1;
-    		if(!arr.contains(tmp))
+    		if(!arr.contains(tmp) && !lackyArr.contains(tmp))
     			arr.add(tmp);
     	}
+    	arr.addAll(lackyArr);
     	
     	bubbleSort(arr);
     	try
@@ -50,6 +54,10 @@ public class GetLoto extends Activity {
 		   	    //tv.append("Random Number : " + arr.get(i) + "\r\n");
 	    		tv.append(arr.get(i).toString());
 	    		tv.setWidth(40);
+	    		
+	    		if(lackyArr.contains(arr.get(i)))
+	    			tv.setTextColor(-65536);
+	    		
 		   	    L.addView(tv);
 	    	}
     	
