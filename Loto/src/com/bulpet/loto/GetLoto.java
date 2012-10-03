@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import android.os.Bundle;
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.graphics.drawable.Drawable;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -24,7 +27,9 @@ public class GetLoto extends Activity {
         return true;
     }
     
-    public void RandomMe(View v)
+    @SuppressLint("NewApi")
+	@SuppressWarnings("deprecation")
+	public void RandomMe(View v)
     {
     	Random r = new Random();
     	
@@ -47,6 +52,7 @@ public class GetLoto extends Activity {
     	{
 	    	LinearLayout L = (LinearLayout)this.findViewById(R.id.linear);
 	    	L.removeAllViews();
+	    	L.setPadding(5, 0, 5, 0);
 	    	
 	    	for(int i=0;i<arr.size();i++)
 	    	{
@@ -58,7 +64,15 @@ public class GetLoto extends Activity {
 	    		if(lackyArr.contains(arr.get(i)))
 	    			tv.setTextColor(-65536);
 	    		
-		   	    L.addView(tv);
+	    		tv.setBackground(getResources().getDrawable(R.drawable.kadur1));
+	    		tv.setWidth(30);
+	    		tv.setHeight(30);
+	    		tv.setGravity(Gravity.CENTER);
+	    		tv.setPadding(5, 0, 5, 0);
+	    		
+	    		LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(35, 35);
+
+		   	    L.addView(tv,layoutParams);
 	    	}
     	
     	}
