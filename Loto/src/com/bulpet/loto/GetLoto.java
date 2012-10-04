@@ -5,12 +5,14 @@ import java.util.Random;
 
 import android.os.Bundle;
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
 public class GetLoto extends Activity {
@@ -56,23 +58,7 @@ public class GetLoto extends Activity {
 	    	
 	    	for(int i=0;i<arr.size();i++)
 	    	{
-	    		TextView tv = new TextView(this);
-		   	    //tv.append("Random Number : " + arr.get(i) + "\r\n");
-	    		tv.append(arr.get(i).toString());
-	    		tv.setWidth(40);
-	    		
-	    		if(lackyArr.contains(arr.get(i)))
-	    			tv.setTextColor(-65536);
-	    		
-	    		tv.setBackground(getResources().getDrawable(R.drawable.kadur1));
-	    		tv.setWidth(30);
-	    		tv.setHeight(30);
-	    		tv.setGravity(Gravity.CENTER);
-	    		tv.setPadding(5, 0, 5, 0);
-	    		
-	    		LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(35, 35);
-
-		   	    L.addView(tv,layoutParams);
+		   	    L.addView(CreateView(arr.get(i),lackyArr.contains(arr.get(i))));
 	    	}
     	
     	}
@@ -88,6 +74,30 @@ public class GetLoto extends Activity {
    	    //setContentView(tv);
     }
     
+    @TargetApi(16)
+	private TextView CreateView(Integer numb,Boolean isLackyNumber)
+    {
+    	TextView tv = new TextView(this);
+   	    //tv.append("Random Number : " + arr.get(i) + "\r\n");
+		tv.append(numb.toString());
+		tv.setWidth(40);
+		
+		if(isLackyNumber)
+			tv.setTextColor(-65536);
+		
+		tv.setBackground(getResources().getDrawable(R.drawable.kadur1));
+		tv.setWidth(30);
+		tv.setHeight(30);
+		tv.setGravity(Gravity.CENTER);
+		
+		LayoutParams layoutParams = new LinearLayout.LayoutParams(50, 50);
+        layoutParams.setMargins(6, 2, 6, 2);
+        
+		tv.setLayoutParams(layoutParams);
+		
+		return tv;
+
+    }
     
     /**
      * This method performs the bubble sort

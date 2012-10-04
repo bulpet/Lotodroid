@@ -20,11 +20,11 @@ public class LackyNumbers {
 	public ArrayList<Integer> getLackyNumbers()
 	{
 		Random r = new Random();
-		int i =r.nextInt(6);
+		int i =r.nextInt(7);
 		
 		ArrayList<Integer> arr= new ArrayList<Integer>(i);
 		
-		for(int k=0;k<=i;k++)
+		for(int k=0;k<i;k++)
 		{
 			int indx = r.nextInt(lackynums.size());
 			int tmp = lackynums.get(indx);
